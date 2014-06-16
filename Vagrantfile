@@ -48,10 +48,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	
 	chef_config.vm.provision "chef_solo" do |chef|
 	  chef.add_recipe "core"
+	  chef.add_recipe "chef"
 	end	
   end
   # End chef
-  
+=begin
   # Begin controller
   config.vm.define "controller" do |controller_config|
     controller_config.vm.hostname = "controller"
@@ -169,5 +170,5 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
   # End cinder
-
+=end
 end
