@@ -21,6 +21,8 @@ SCRIPT
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "precise64"
+  config.vm.box_url = "http://files.vagrantup.com/precise64.box"
+  
   # Turn off shared folders
   config.vm.synced_folder ".", "/vagrant", id: "vagrant-root", disabled: true
   # Begin chef
@@ -43,6 +45,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         v.customize ["modifyvm", :id, "--memory", "512"]
         v.customize ["modifyvm", :id, "--cpus", "1"]
     end
+	
+	chef_config.vm.provision "chef_solo" do |chef|
+	  chef.add_recipe "core"
+	end	
   end
   # End chef
   
