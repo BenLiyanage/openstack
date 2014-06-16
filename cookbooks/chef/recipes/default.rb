@@ -9,11 +9,15 @@ export CHEF_URL=""https://chef:443""
 end
 
 # configure knife
-cookbook_file "/home/vagrant/.chef/knife.rb"
+directory "/home/vagrant/.chef" do
+  action :create
+end
+
+cookbook_file "/home/vagrant/.chef/knife.rb" do
   action :create_if_missing
 end
 # l/p is vagrant/vagrant
-cookbook_file "/home/vagrant/.chef/vagrant.pem"
+cookbook_file "/home/vagrant/.chef/vagrant.pem" do
   action :create_if_missing
 end
 
