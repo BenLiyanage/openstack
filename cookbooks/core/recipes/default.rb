@@ -17,3 +17,7 @@ end
 package "git" do
   action :install
 end
+
+package "expect" do
+  action :install
+end

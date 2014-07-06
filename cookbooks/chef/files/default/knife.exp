@@ -1,0 +1,29 @@
+#!/usr/bin/expect -f
+
+spawn knife configure -i
+expect "*]"
+send -- "\n"
+
+expect "*]"
+send -- "\n"
+
+expect "*]"
+send -- "\n"
+
+expect "*]"
+send -- "\n"
+
+expect "*]"
+send -- "\n"
+
+expect "*]"
+send -- "\n"
+
+expect "*]"
+send -- "\n"
+
+expect "*:"
+send -- "\n"
+
+expect "*user:"
+send -- "vagrant"

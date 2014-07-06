@@ -8,21 +8,22 @@ export CHEF_URL=""https://chef:443""
   end
 end
 
-# configure knife
-directory "/home/vagrant/.chef" do
-  action :create
+# drop in private keys -- these need to be reset at the end of the installation for a real "secure" installation.
+cookbook_file "/home/vagrant/knife.exp" do
+  mode 0755
+  action :create_if_missing
 end
 
-cookbook_file "/home/vagrant/.chef/knife.rb" do
-  action :create_if_missing
-end
-# l/p is vagrant/vagrant
-cookbook_file "/home/vagrant/.chef/vagrant.pem" do
-  action :create_if_missing
+execute "configure-knife" do
+  command "/home/vagrant/knife.exp"
+  only_if do
+    !File.exists?('/home/vagrant/.chef/knife.rb')
+  end
 end
 
 execute "install-cookbooks" do
-  command "git clone https://github.com/rcbops/chef-cookbooks.git
+  command "cd /home/vagrant
+git clone https://github.com/rcbops/chef-cookbooks.git
 cd chef-cookbooks
 git checkout v4.2.2
 git submodule init

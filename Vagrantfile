@@ -47,8 +47,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
 	
 	chef_config.vm.provision "chef_solo" do |chef|
+	  chef.log_level = :debug
 	  chef.add_recipe "core"
-	  chef.add_recipe "chef"
+	  chef.add_recipe "chef"	    
 	end	
   end
   # End chef
