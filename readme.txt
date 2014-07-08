@@ -14,6 +14,9 @@ To get this up and running, you need the following:
 * GitHub Account
 * Vagrant (confirmed on version 1.4.3)
 * Virtual Box (confirmed on 4.2)
+* 64-bit OS
+* enable VT-x/AMD-V in bios (IMPORTANT.  Your VMs will not boot.  Openstack requires a 64-bit os)
+* ~ 10 spare gigs of RAM
 
 Optional Recommended Software:
 
@@ -37,7 +40,17 @@ The other nodes are currently commented out in the vagrant file.  After the chef
 
 Notes & Trouble Shooting Tips
 
-Provisioning Chef
+* Booting Your First VM
+
+If you get a timeout error while trying to boot your first VM, you may need to enable VT-x/AMD-V in your bios.  To help troubleshoot the issue you can add the following to your vagrant config file below the box_url:
+
+  config.vm.provider :virtualbox do |vb|
+    vb.gui = true
+  end
+
+This will allow you to see any errors that virtual box is throwing.  After resolving any virtual box issues, this line will need to be removed, and you will need to reinitialize your vagrant environment (Aka, "vagrant destroy" followed by "vagrant up".)
+  
+* Provisioning Chef
 
 If you are seeing the following error while provisioning the chef server:
 

@@ -22,7 +22,7 @@ SCRIPT
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "precise64"
   config.vm.box_url = "http://files.vagrantup.com/precise64.box"
-  
+
   # Turn off shared folders
   config.vm.synced_folder ".", "/vagrant", id: "vagrant-root", disabled: true
   # Begin chef
@@ -30,7 +30,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef_config.vm.hostname = "chef"
     chef_config.vm.provision "shell", inline: $script
     # eth1 configured in the 192.168.236.0/24 network
-    chef_config.vm.network "private_network", ip: "192.168.236.10"
+    chef_config.vm.network "public_network", ip: "192.168.236.10"
     chef_config.vm.provider "vmware_workstation" do |v|
         v.vmx["memsize"] = "512"
         v.vmx["numvcpus"] = "1"
